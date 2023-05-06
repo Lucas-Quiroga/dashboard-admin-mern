@@ -40,7 +40,7 @@ const RegistroForm = ({ changeState }: RegistroFormProps) => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="g">
+        <Button variant="primary" type="button" className="g">
           Registrarse
         </Button>
         <Button
@@ -57,3 +57,9 @@ const RegistroForm = ({ changeState }: RegistroFormProps) => {
 };
 
 export default RegistroForm;
+
+{
+  /* <Button variant="primary" type="submit" className="g">
+          Registrarse
+        </Button> */
+}

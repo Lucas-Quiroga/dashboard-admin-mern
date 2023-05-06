@@ -10,3 +10,5 @@ async function connectDataBase({ host, port, dataBaseName }) {
     useNewUrlParser: true,
   });
 }
+
+module.exports = connectDataBase;
