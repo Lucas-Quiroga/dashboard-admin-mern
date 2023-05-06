@@ -1,5 +1,5 @@
 import RegistroForm from "./Register";
-import imgSvg from "./../../../public/register.svg";
+import imgSvg from "./../../assets/register.svg";
 
 type modelProps = {
   changeState: () => void;

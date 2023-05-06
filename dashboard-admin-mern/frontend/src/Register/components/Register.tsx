@@ -21,19 +21,23 @@ const RegistroForm = ({ changeState }: RegistroFormProps) => {
     <div className="container">
       <h4 className="text-dark mt-2 mb-2">Create acount</h4>
       <Form>
-        <Form.Group controlId="email" className="mb-3">
+        <Form.Group controlId="email" className="mb-2">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Ingresa tu email" />
+          <Form.Control type="email" placeholder="Enter email" />
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control type="password" placeholder="Ingresa tu contraseña" />
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" />
         </Form.Group>
 
-        <Form.Group controlId="confirmPassword" className="mb-3">
-          <Form.Label>Confirmar Contraseña</Form.Label>
-          <Form.Control type="password" placeholder="Confirma tu contraseña" />
+        <Form.Group controlId="confirmPassword" className="pt-2">
+          <Form.Label>Confirm password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Confirm password"
+            className="mb-3"
+          />
         </Form.Group>
 
         <Button variant="primary" type="submit" className="g">

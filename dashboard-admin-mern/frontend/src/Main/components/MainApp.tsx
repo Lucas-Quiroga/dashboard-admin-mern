@@ -11,9 +11,9 @@ const MainApp = () => {
   return (
     <div className="container">
       {changeForm ? (
-        <ModelRegister changeState={changeState} />
-      ) : (
         <ModelLogin changeState={changeState} />
+      ) : (
+        <ModelRegister changeState={changeState} />
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import Login from "./Login";
-import imgSvg from "./../../../public/login.svg";
+import imgSvg from "./../../assets/login.svg";
 
 type modelProps = {
   changeState: () => void;
