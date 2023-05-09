@@ -33,7 +33,11 @@ router.post("/register", async (req, res) => {
       req.flash("error_msg", "El correo electrónico ya está registrado");
       return res.redirect("/register");
     }
-    const hash = await bcrypt.hash(password, 10);
+    if (!password || typeof password !== "string") {
+      throw new Error("Contraseña inválida");
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
     const newUser = new User({ email, password: hash });
     await newUser.save();
     req.flash("success_msg", "Te has registrado correctamente");
@@ -41,7 +45,7 @@ router.post("/register", async (req, res) => {
   } catch (error) {
     console.error(error);
     req.flash("error_msg", "Ha ocurrido un error al registrar el usuario");
-    res.redirect("/register");
+    res.redirect("/register?error=" + encodeURIComponent(error.message));
   }
 });
 

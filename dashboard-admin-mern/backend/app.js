@@ -4,6 +4,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const authRouter = require("./routes/auth");
 const app = express();
 
 app.use(cors());
@@ -23,5 +24,7 @@ app.use(
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use("/", authRouter);
 
 module.exports = app;

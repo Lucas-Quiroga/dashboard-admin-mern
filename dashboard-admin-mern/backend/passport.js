@@ -4,11 +4,14 @@ const bcrypt = require("bcrypt");
 const User = require("./models/User");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
+const cors = require("cors");
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: "probandoAleatoriamente",
 };
+
+app.use(cors());
 
 passport.use(
   new LocalStrategy(

@@ -35,7 +35,6 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
           <Form.Control
             type="email"
             placeholder="Enter email"
-            value={user.email}
             onChange={handleChange}
             required
           />
@@ -46,7 +45,6 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
           <Form.Control
             type="password"
             placeholder="Password"
-            value={user.password}
             onChange={handleChange}
             required
           />
@@ -58,7 +56,6 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
             type="password"
             placeholder="Confirm password"
             className="mb-3"
-            value={user.confirmPassword}
             onChange={handleChange}
             required
           />
@@ -76,9 +73,3 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
 };
 
 export default RegistroForm;
-
-{
-  /* <Button variant="primary" type="submit" className="g">
-          Registrarse
-        </Button> */
-}

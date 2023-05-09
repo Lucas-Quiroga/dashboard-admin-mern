@@ -33,7 +33,6 @@ function Login({ handleLogin }: LoginProps) {
           <Form.Control
             type="email"
             placeholder="Enter email"
-            value={user.email}
             onChange={handleChange}
             required
           />
@@ -47,7 +46,6 @@ function Login({ handleLogin }: LoginProps) {
           <Form.Control
             type="password"
             placeholder="Password"
-            value={user.password}
             onChange={handleChange}
             required
             autoComplete="current-password"
