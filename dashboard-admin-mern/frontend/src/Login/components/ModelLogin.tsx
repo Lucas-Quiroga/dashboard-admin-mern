@@ -1,11 +1,17 @@
 import Login from "./Login";
 import imgSvg from "./../../assets/login.svg";
 
+interface User {
+  email: string;
+  password: string;
+  confirmPassword?: string;
+}
+
 type modelProps = {
-  changeState: () => void;
+  handleLogin: (user: User) => void;
 };
 
-const Model = ({ changeState }: modelProps) => {
+const Model = ({ handleLogin }: modelProps) => {
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -26,7 +32,7 @@ const Model = ({ changeState }: modelProps) => {
                   </div>
                 </div>
                 <div className="col-lg-6">
-                  <Login changeState={changeState} />
+                  <Login handleLogin={handleLogin} />
                 </div>
               </div>
             </div>

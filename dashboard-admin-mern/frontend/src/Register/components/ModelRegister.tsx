@@ -1,11 +1,17 @@
 import RegistroForm from "./Register";
 import imgSvg from "./../../assets/register.svg";
 
+interface User {
+  email: string;
+  password: string;
+  confirmPassword?: string;
+}
+
 type modelProps = {
-  changeState: () => void;
+  handleRegister: (user: User) => void;
 };
 
-const ModelRegister = ({ changeState }: modelProps) => {
+const ModelRegister = ({ handleRegister }: modelProps) => {
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -26,7 +32,7 @@ const ModelRegister = ({ changeState }: modelProps) => {
                   </div>
                 </div>
                 <div className="col-lg-6">
-                  <RegistroForm changeState={changeState} />
+                  <RegistroForm handleRegister={handleRegister} />
                 </div>
               </div>
             </div>

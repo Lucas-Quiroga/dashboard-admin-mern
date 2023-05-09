@@ -1,34 +1,55 @@
+import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
-// interface RegistroFormProps {
-//   onSubmit: (data: RegistroFormData) => void;
-// }
-
-// interface RegistroFormData {
-//   nombre: string;
-//   apellido: string;
-//   email: string;
-//   password: string;
-//   confirmPassword: string;
-// }
+interface User {
+  email: string;
+  password: string;
+  confirmPassword?: string;
+}
 
 type RegistroFormProps = {
-  changeState: () => void;
+  handleRegister: (user: User) => void;
 };
 
-const RegistroForm = ({ changeState }: RegistroFormProps) => {
+const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
+  const [user, setUser] = useState<User>({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handleRegister(user);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [event.target.name]: event.target.value });
+  };
   return (
     <div className="container">
       <h4 className="text-dark mt-2 mb-2">Create acount</h4>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group controlId="email" className="mb-2">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            value={user.email}
+            onChange={handleChange}
+            required
+          />
         </Form.Group>
 
         <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={user.password}
+            onChange={handleChange}
+            required
+          />
         </Form.Group>
 
         <Form.Group controlId="confirmPassword" className="pt-2">
@@ -37,18 +58,16 @@ const RegistroForm = ({ changeState }: RegistroFormProps) => {
             type="password"
             placeholder="Confirm password"
             className="mb-3"
+            value={user.confirmPassword}
+            onChange={handleChange}
+            required
           />
         </Form.Group>
 
-        <Button variant="primary" type="button" className="g">
+        <Button variant="primary" type="submit">
           Registrarse
         </Button>
-        <Button
-          variant="secondary"
-          type="button"
-          onClick={changeState}
-          className="mx-2"
-        >
+        <Button variant="secondary" type="button" className="mx-2">
           Logear
         </Button>
       </Form>
