@@ -8,7 +8,7 @@ const authRouter = require("./routes/auth");
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Configuración de la sesión

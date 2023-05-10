@@ -1,8 +1,14 @@
+//BACKEND
+
 nodemon: Una herramienta que reinicia automáticamente tu servidor Node.js cada vez que se detectan cambios en el código fuente. Esto es útil para agilizar el proceso de desarrollo y evitar tener que reiniciar el servidor manualmente cada vez que se hacen cambios.
 
 standard: Un linter de JavaScript que te ayuda a mantener un código consistente y legible. Es una buena práctica incluir un linter en tu proyecto para ayudarte a detectar y corregir errores antes de que se conviertan en problemas.
 
+bcrypt: es una librería que permite cifrar y descifrar contraseñas de manera segura, utilizando un algoritmo de hashing unidireccional. Es comúnmente utilizado para almacenar contraseñas de manera segura en una base de datos.
+
 body-parser: Un middleware de Express que analiza el cuerpo de las solicitudes HTTP y lo convierte en un objeto JavaScript que se puede manipular fácilmente. Esto es útil para acceder a los datos enviados en el cuerpo de una solicitud POST o PUT.
+
+connect-flash: es una librería que permite enviar mensajes flash desde el servidor al cliente en la próxima solicitud. Esto es útil para mostrar mensajes de error o éxito después de una acción en el servidor.
 
 cors: Un middleware de Express que habilita el intercambio de recursos de origen cruzado (CORS) en tu servidor. Esto es útil cuando tu servidor necesita interactuar con recursos de otros dominios o subdominios.
 
@@ -10,6 +16,32 @@ dotenv: Una herramienta que carga variables de entorno desde un archivo .env en 
 
 express: Un framework de Node.js que facilita la creación de servidores web y API. Es muy popular y cuenta con una gran cantidad de recursos y documentación disponible en línea.
 
+express-session: es una librería que permite crear y administrar sesiones de usuario en una aplicación web de Express. Permite almacenar información específica de la sesión del usuario en el servidor, lo que es útil para autenticar usuarios y mantener datos persistentes entre solicitudes.
+
 mongoose: Una biblioteca de Node.js que proporciona una capa de abstracción sobre MongoDB, lo que facilita la interacción con la base de datos y la manipulación de los datos.
 
 multer: Un middleware de Express que permite manejar el envío de archivos en las solicitudes HTTP. Esto es útil cuando necesitas permitir que los usuarios suban archivos a tu servidor.
+
+passport: es una librería de autenticación para Node.js que proporciona una forma fácil de autenticar usuarios utilizando diferentes estrategias de autenticación, como local, Google, Facebook, etc.
+
+passport-local: es una estrategia de autenticación de Passport que permite autenticar a los usuarios utilizando un nombre de usuario y una contraseña almacenados en una base de datos local.
+
+---------------------------------------------------------------------------------------------------
+
+//FRONTEND  
+
+axios: es una biblioteca para hacer solicitudes HTTP desde el navegador o Node.js. Es una herramienta popular para hacer solicitudes AJAX y API en aplicaciones web.
+
+bootstrap: es un framework CSS que proporciona estilos y componentes predefinidos para el diseño y la estructura de la página web. Bootstrap se utiliza comúnmente para crear sitios web responsivos y móviles.
+
+react: es una biblioteca de JavaScript de código abierto utilizada para construir interfaces de usuario (UI) en aplicaciones web de una sola página (SPA) y aplicaciones móviles. React permite a los desarrolladores crear componentes reutilizables y manejar el estado de manera eficiente para crear aplicaciones web dinámicas y altamente interactivas.
+
+react-bootstrap: es una biblioteca de componentes para React que proporciona una integración de Bootstrap para aplicaciones React. Proporciona una manera fácil de usar los estilos y componentes de Bootstrap en una aplicación React.
+
+react-dom: es un paquete que proporciona un enlace entre React y el DOM del navegador. Es la biblioteca que se encarga de renderizar los componentes de React en la página web.
+
+react-router-dom: es una biblioteca de React para manejar el enrutamiento de las páginas web. Proporciona una manera fácil de crear rutas en una aplicación React y cambiar las páginas sin tener que recargar la página completa.
+
+typescript: es un lenguaje de programación de código abierto que es una extensión de JavaScript. Proporciona una sintaxis tipada opcional que ayuda a detectar errores en tiempo de compilación y a mejorar el desarrollo de aplicaciones escalables y mantenibles.
+
+vite: es una herramienta de construcción de aplicaciones web de código abierto y rápido para proyectos basados en JavaScript. Se enfoca en la velocidad de compilación y proporciona un servidor de desarrollo rápido y un proceso de compilación optimizado para reducir el tiempo de espera del desarrollador durante el ciclo de desarrollo.
