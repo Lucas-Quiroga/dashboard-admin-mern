@@ -1,32 +1,22 @@
 const express = require("express");
-const passport = require("passport");
-const bcrypt = require("bcrypt");
-const User = require("./../models/User");
 const api = express.Router();
-const { registerUser } = require("./../controllers/usersController");
 
-api.get("/login", (req, res) => {
-  res.render("login");
-});
+const {
+  registerUser,
+  loginUser,
+  logout,
+  showRegistrationPage,
+  showLoginPage,
+} = require("./../controllers/usersController");
 
-api.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true,
-  })
-);
-
-api.get("/register", (req, res) => {
-  res.render("register");
-});
+api.get("/register", showRegistrationPage);
 
 api.post("/register", registerUser);
 
-api.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/login");
-});
+api.get("/login", showLoginPage);
+
+api.post("/login", loginUser);
+
+api.get("/logout", logout);
 
 module.exports = api;
