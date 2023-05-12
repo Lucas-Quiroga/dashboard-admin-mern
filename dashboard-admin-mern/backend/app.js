@@ -9,7 +9,7 @@ const User = require("./models/User");
 // const ExtractJwt = require("passport-jwt").ExtractJwt;
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const authRouter = require("./routes/auth");
+const api = require("./routes/auth");
 const app = express();
 
 app.use(cors());
@@ -54,6 +54,6 @@ passport.use(
   )
 );
 
-app.use("/", authRouter);
+app.use("/", api);
 
 module.exports = app;

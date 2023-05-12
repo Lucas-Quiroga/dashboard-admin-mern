@@ -11,7 +11,7 @@ type modelProps = {
   handleRegister: (user: User) => void;
 };
 
-const ModelRegister = ({ handleRegister }: modelProps) => {
+const ModelRegister = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -32,7 +32,7 @@ const ModelRegister = ({ handleRegister }: modelProps) => {
                   </div>
                 </div>
                 <div className="col-lg-6">
-                  <RegistroForm handleRegister={handleRegister} />
+                  <RegistroForm />
                 </div>
               </div>
             </div>

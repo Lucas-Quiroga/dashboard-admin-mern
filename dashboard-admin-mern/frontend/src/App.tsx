@@ -26,7 +26,7 @@ function App({}: AppProps) {
 
   const handleLogin = (user: User) => {
     axios
-      .post("/api/login", user)
+      .post("/login", user)
       .then(() => {
         setAuthenticated(true);
       })
@@ -35,16 +35,23 @@ function App({}: AppProps) {
       });
   };
 
-  const handleRegister = (user: User) => {
-    axios
-      .post("/api/register", user)
-      .then(() => {
-        setAuthenticated(true);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const handleRegister = async (user: User) => {
+    try {
+      const response = await axios.post("http://localhost:8080/register", user);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  // axios
+  //   .get("http://localhost:8080/ping")
+  //   .then((response) => {
+  //     console.log(response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
 
   return (
     <div className="container mt-5">
@@ -54,10 +61,7 @@ function App({}: AppProps) {
             path="/login"
             element={<ModelLogin handleLogin={handleLogin} />}
           />
-          <Route
-            path="/register"
-            element={<ModelRegister handleRegister={handleRegister} />}
-          />
+          <Route path="/register" element={<ModelRegister />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,8 +1,11 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const app = require("./app");
+const cors = require("cors");
 const connectDb = require("./db/mongodb");
 const { appConfig, dataBaseConfig } = require("./config");
+
+app.use(cors());
 
 async function initApp(appConfig, dataBaseConfig) {
   try {

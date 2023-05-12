@@ -9,7 +9,14 @@ const {
   showLoginPage,
 } = require("./../controllers/usersController");
 
-api.get("/register", showRegistrationPage);
+api.get("/register", (req, res) => {
+  try {
+    res.render("register");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+});
 
 api.post("/register", registerUser);
 

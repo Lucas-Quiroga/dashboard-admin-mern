@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 interface User {
   email: string;
@@ -11,12 +12,21 @@ type RegistroFormProps = {
   handleRegister: (user: User) => void;
 };
 
-const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
+const RegistroForm = () => {
   const [user, setUser] = useState<User>({
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const handleRegister = async (user: User) => {
+    try {
+      const response = await axios.post("http://localhost:8080/register", user);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,6 +35,7 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [event.target.name]: event.target.value });
+    // console.log(user);
   };
   return (
     <div className="container">
@@ -34,6 +45,7 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
+            name="email"
             placeholder="Enter email"
             onChange={handleChange}
             required
@@ -44,6 +56,7 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
+            name="password"
             placeholder="Password"
             onChange={handleChange}
             required
@@ -54,6 +67,7 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
           <Form.Label>Confirm password</Form.Label>
           <Form.Control
             type="password"
+            name="confirmPassword"
             placeholder="Confirm password"
             className="mb-3"
             onChange={handleChange}
