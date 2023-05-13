@@ -26,7 +26,7 @@ function App({}: AppProps) {
 
   const handleLogin = (user: User) => {
     axios
-      .post("/login", user)
+      .post("http://localhost:8080/login", user)
       .then(() => {
         setAuthenticated(true);
       })
@@ -43,15 +43,6 @@ function App({}: AppProps) {
       console.log(error);
     }
   };
-
-  // axios
-  //   .get("http://localhost:8080/ping")
-  //   .then((response) => {
-  //     console.log(response.data);
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
 
   return (
     <div className="container mt-5">

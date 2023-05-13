@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import axios from "axios";
 
 interface User {
   email: string;
@@ -12,8 +13,20 @@ interface LoginProps {
   handleLogin: (user: User) => void;
 }
 
-function Login({ handleLogin }: LoginProps) {
+function Login() {
   const [user, setUser] = useState<User>({ email: "", password: "" });
+
+  const handleLogin = async (user: User) => {
+    try {
+      const response = await axios
+        .post("http://localhost:8080/login", user)
+        .then(() => {
+          console.log(response);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,6 +35,7 @@ function Login({ handleLogin }: LoginProps) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [event.target.name]: event.target.value });
+    console.log(user);
   };
 
   return (
@@ -32,6 +46,7 @@ function Login({ handleLogin }: LoginProps) {
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
+            name="email"
             placeholder="Enter email"
             onChange={handleChange}
             required
@@ -45,6 +60,7 @@ function Login({ handleLogin }: LoginProps) {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
+            name="password"
             placeholder="Password"
             onChange={handleChange}
             required

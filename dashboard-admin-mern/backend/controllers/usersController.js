@@ -28,12 +28,10 @@ async function registerUser(req, res) {
     return res.status(200).json({ message: "Te has registrado correctamente" });
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({
-        message: "Ha ocurrido un error al registrar el usuario",
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: "Ha ocurrido un error al registrar el usuario",
+      error: error.message,
+    });
   }
 }
 
@@ -49,20 +47,28 @@ async function showRegistrationPage(req, res) {
 
 //funcion para logear al Usuario (método POST)
 async function loginUser(req, res, next) {
-  passport.authenticate("local", function (err, user, info) {
+  passport.authenticate("local", function (err, User, info) {
     if (err) {
-      return next(err);
+      return res
+        .status(500)
+        .json({ success: false, message: "Error interno del servidor" });
     }
-    if (!user) {
-      req.flash("error_msg", "Usuario o contraseña incorrectos");
-      return res.redirect("/login");
+    if (!User) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Usuario o contraseña incorrectos" });
     }
-    req.logIn(user, function (err) {
+    req.logIn(User, function (err) {
       if (err) {
-        return next(err);
+        return res
+          .status(500)
+          .json({ success: false, message: "Error interno del servidor" });
       }
-      req.flash("success_msg", "Has iniciado sesión correctamente");
-      return res.redirect("/");
+      return res.status(200).json({
+        success: true,
+        message: "Has iniciado sesión correctamente",
+        User: User,
+      });
     });
   })(req, res, next);
 }
