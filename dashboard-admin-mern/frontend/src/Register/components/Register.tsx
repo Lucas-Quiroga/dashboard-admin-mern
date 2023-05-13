@@ -78,7 +78,12 @@ const RegistroForm = () => {
         <Button variant="primary" type="submit">
           Registrarse
         </Button>
-        <Button variant="secondary" type="button" className="mx-2">
+        <Button
+          variant="secondary"
+          type="button"
+          className="mx-2"
+          href="/login"
+        >
           Logear
         </Button>
       </Form>

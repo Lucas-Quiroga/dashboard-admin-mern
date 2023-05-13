@@ -74,8 +74,8 @@ function Login() {
         <Button
           variant="secondary"
           type="button"
-          // onClick={changeState}
           className="mx-2"
+          href="/register"
         >
           Register
         </Button>

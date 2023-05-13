@@ -47,29 +47,55 @@ async function showRegistrationPage(req, res) {
 
 //funcion para logear al Usuario (método POST)
 async function loginUser(req, res, next) {
-  passport.authenticate("local", function (err, User, info) {
-    if (err) {
+  passport.authenticate("local", async function (err, user, info) {
+    const { email, password } = req.body;
+    if (!email || typeof email !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Debes proporcionar un correo electrónico válido.",
+      });
+    }
+
+    try {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        console.log("Usuario no encontrado");
+        return res.status(401).json({
+          success: false,
+          message: "Usuario o contraseña incorrectos",
+        });
+      }
+
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (!passwordMatch) {
+        return res.status(401).json({
+          success: false,
+          message: "Usuario o contraseña incorrectos.",
+        });
+      }
+
+      req.logIn(user, function (err) {
+        if (err) {
+          console.log("Error interno del servidor:", err);
+          return res
+            .status(500)
+            .json({ success: false, message: "Error interno del servidor" });
+        }
+        console.log("Inicio de sesión exitoso");
+        return res.status(200).json({
+          success: true,
+          message: "Has iniciado sesión correctamente",
+          User: user,
+        });
+      });
+    } catch (error) {
+      console.log("Error interno del servidor:", error);
       return res
         .status(500)
         .json({ success: false, message: "Error interno del servidor" });
     }
-    if (!User) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Usuario o contraseña incorrectos" });
-    }
-    req.logIn(User, function (err) {
-      if (err) {
-        return res
-          .status(500)
-          .json({ success: false, message: "Error interno del servidor" });
-      }
-      return res.status(200).json({
-        success: true,
-        message: "Has iniciado sesión correctamente",
-        User: User,
-      });
-    });
   })(req, res, next);
 }
 

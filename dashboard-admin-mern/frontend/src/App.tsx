@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./Home/components/Home";
 import ModelRegister from "./Register/components/ModelRegister";
 import ModelLogin from "./Login/components/ModelLogin";
 
@@ -48,6 +49,7 @@ function App({}: AppProps) {
     <div className="container mt-5">
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route
             path="/login"
             element={<ModelLogin handleLogin={handleLogin} />}
