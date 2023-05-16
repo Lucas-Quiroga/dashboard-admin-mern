@@ -11,6 +11,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const api = require("./routes/auth");
 const app = express();
+require("./passportConfig");
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,40 +20,22 @@ app.use(bodyParser.json());
 // Configuración de la sesión
 app.use(
   session({
-    secret: "mi-secreto",
-    resave: false,
-    saveUninitialized: false,
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
   })
 );
-
-// Configuración de flash y passport
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(
-  new LocalStrategy(
-    {
-      usernameField: "email",
-      passwordField: "password",
-    },
-    async (email, password, done) => {
-      try {
-        const user = await User.findOne({ email });
-        if (!user) {
-          return done(null, false, { message: "Usuario no encontrado" });
-        }
-        const isMatch = await user.comparePassword(password);
-        if (!isMatch) {
-          return done(null, false, { message: "Contraseña incorrecta" });
-        }
-        return done(null, user, { message: "usuario registrado" });
-      } catch (error) {
-        return done(error);
-      }
-    }
-  )
-);
+// Configuración de flash y passport
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 app.use("/", api);
 

@@ -1,9 +1,9 @@
 const express = require("express");
+const passport = require("passport");
 const api = express.Router();
 
 const {
   registerUser,
-  loginUser,
   logout,
   showRegistrationPage,
   showLoginPage,
@@ -21,8 +21,17 @@ api.get("/register", (req, res) => {
 api.post("/register", registerUser);
 
 api.get("/login", showLoginPage);
+api.post(
+  "/login",
+  passport.authenticate("login", {
+    failureRedirect: "/login",
+    successRedirect: "/login/inicio",
+  })
+);
 
-api.post("/login", loginUser);
+api.get("/login/inicio", (req, res) => {
+  res.send("hola loquito");
+});
 
 api.get("/logout", logout);
 

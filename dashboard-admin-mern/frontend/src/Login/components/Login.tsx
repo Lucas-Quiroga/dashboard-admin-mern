@@ -18,18 +18,14 @@ function Login() {
 
   const handleLogin = async (user: User) => {
     try {
-      const response = await axios
-        .post("http://localhost:8080/login", user)
-        .then(() => {
-          console.log(response);
-        });
+      const response = await axios.post("http://localhost:8080/login", user);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     handleLogin(user);
   };
 

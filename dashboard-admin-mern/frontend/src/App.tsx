@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./Home/components/Home";
 import ModelRegister from "./Register/components/ModelRegister";
 import ModelLogin from "./Login/components/ModelLogin";
+import HomeLogin from "./Home/components/HomeLogin";
 
 interface User {
   email: string;
@@ -50,6 +51,7 @@ function App({}: AppProps) {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login/inicio" element={<HomeLogin />} />
           <Route
             path="/login"
             element={<ModelLogin handleLogin={handleLogin} />}

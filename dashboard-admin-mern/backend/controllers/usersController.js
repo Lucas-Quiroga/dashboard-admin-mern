@@ -1,5 +1,5 @@
 const express = require("express");
-const passport = require("passport");
+// const passport = require("passport");
 const bcrypt = require("bcrypt");
 const User = require("./../models/User");
 const router = express.Router();
@@ -45,64 +45,68 @@ async function showRegistrationPage(req, res) {
   }
 }
 
-//funcion para logear al Usuario (método POST)
-async function loginUser(req, res, next) {
-  passport.authenticate("local", async function (err, user, info) {
-    const { email, password } = req.body;
-    if (!email || typeof email !== "string") {
-      return res.status(400).json({
-        success: false,
-        message: "Debes proporcionar un correo electrónico válido.",
-      });
-    }
+// funcion para logear al Usuario (método POST)
+// async function loginUser(req, res, next) {
+//   passport.authenticate("login", {
+//     failureRedirect: "/",
+//     successRedirect: "/notes",
+//     failureMessage: true,
+//   })(req, res, next);
+// }
 
-    try {
-      const user = await User.findOne({ email });
+// async function loginUser(req, res, next) {
+//   passport.authenticate("login", async function (err, user, info) {
+//     const { email, password } = req.body;
+//     console.log(req.body);
+//     if (!email || typeof email !== "string") {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Debes proporcionar un correo electrónico válido.",
+//       });
+//     }
 
-      if (!user) {
-        console.log("Usuario no encontrado");
-        return res.status(401).json({
-          success: false,
-          message: "Usuario o contraseña incorrectos",
-        });
-      }
+//     try {
+//       const user = await User.findOne({ email });
 
-      const passwordMatch = await bcrypt.compare(password, user.password);
+//       if (!user) {
+//         console.log("Usuario no encontrado");
+//         return res.status(401).json({
+//           success: false,
+//           message: "Usuario o contraseña incorrectos",
+//         });
+//       }
 
-      if (!passwordMatch) {
-        return res.status(401).json({
-          success: false,
-          message: "Usuario o contraseña incorrectos.",
-        });
-      }
+//       const passwordMatch = await bcrypt.compare(password, user.password);
 
-      req.logIn(user, function (err) {
-        if (err) {
-          console.log("Error interno del servidor:", err);
-          return res
-            .status(500)
-            .json({ success: false, message: "Error interno del servidor" });
-        }
-        console.log("Inicio de sesión exitoso");
-        return res.status(200).json({
-          success: true,
-          message: "Has iniciado sesión correctamente",
-          User: user,
-        });
-      });
-    } catch (error) {
-      console.log("Error interno del servidor:", error);
-      return res
-        .status(500)
-        .json({ success: false, message: "Error interno del servidor" });
-    }
-  })(req, res, next);
-}
+//       if (!passwordMatch) {
+//         return res.status(401).json({
+//           success: false,
+//           message: "Usuario o contraseña incorrectos.",
+//         });
+//       }
 
+//       req.logIn(user, function (err) {
+//         if (err) {
+//           console.log("Error interno del servidor:", err);
+//           return res
+//             .status(500)
+//             .json({ success: false, message: "Error interno del servidor" });
+//         }
+//         console.log("Inicio de sesión exitoso");
+//         return res.redirect("/login/inicio"); // Redirigir al usuario a la página de inicio
+//       });
+//     } catch (error) {
+//       console.log("Error interno del servidor:", error);
+//       return res
+//         .status(500)
+//         .json({ success: false, message: "Error interno del servidor" });
+//     }
+//   })(req, res, next);
+// }
 //funcion mostrar el render de la pagina de login (método GET)
 async function showLoginPage(req, res) {
   try {
-    res.render("login");
+    res.redirect("/login");
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
@@ -123,7 +127,6 @@ async function logout(req, res) {
 module.exports = {
   registerUser,
   showRegistrationPage,
-  loginUser,
   showLoginPage,
   logout,
 };
