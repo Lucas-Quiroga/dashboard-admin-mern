@@ -13,7 +13,6 @@ passport.use(
     async (email, password, done) => {
       try {
         const user = await User.findOne({ email });
-
         if (!user) {
           return done(null, false, {
             message: "Usuario o contraseña incorrectos",
@@ -24,7 +23,7 @@ passport.use(
             return done(null, user);
           } else {
             return done(null, false, {
-              message: "contraseña incorrectos",
+              message: "Contraseña incorrecta",
             });
           }
         }
@@ -39,10 +38,13 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error);
+  }
 });
 
 module.exports = passport;

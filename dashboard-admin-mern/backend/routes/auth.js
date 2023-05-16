@@ -21,16 +21,23 @@ api.get("/register", (req, res) => {
 api.post("/register", registerUser);
 
 api.get("/login", showLoginPage);
-api.post(
-  "/login",
-  passport.authenticate("login", {
-    failureRedirect: "/login",
-    successRedirect: "/login/inicio",
-  })
-);
 
-api.get("/login/inicio", (req, res) => {
-  res.send("hola loquito");
+api.post("/login", (req, res, next) => {
+  passport.authenticate("login", (err, user, info) => {
+    console.log("usuario recibido:", user);
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.redirect("/login");
+    }
+    req.login(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect("/login/inicio");
+    });
+  })(req, res, next);
 });
 
 api.get("/logout", logout);

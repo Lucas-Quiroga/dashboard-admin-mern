@@ -45,68 +45,10 @@ async function showRegistrationPage(req, res) {
   }
 }
 
-// funcion para logear al Usuario (método POST)
-// async function loginUser(req, res, next) {
-//   passport.authenticate("login", {
-//     failureRedirect: "/",
-//     successRedirect: "/notes",
-//     failureMessage: true,
-//   })(req, res, next);
-// }
-
-// async function loginUser(req, res, next) {
-//   passport.authenticate("login", async function (err, user, info) {
-//     const { email, password } = req.body;
-//     console.log(req.body);
-//     if (!email || typeof email !== "string") {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Debes proporcionar un correo electrónico válido.",
-//       });
-//     }
-
-//     try {
-//       const user = await User.findOne({ email });
-
-//       if (!user) {
-//         console.log("Usuario no encontrado");
-//         return res.status(401).json({
-//           success: false,
-//           message: "Usuario o contraseña incorrectos",
-//         });
-//       }
-
-//       const passwordMatch = await bcrypt.compare(password, user.password);
-
-//       if (!passwordMatch) {
-//         return res.status(401).json({
-//           success: false,
-//           message: "Usuario o contraseña incorrectos.",
-//         });
-//       }
-
-//       req.logIn(user, function (err) {
-//         if (err) {
-//           console.log("Error interno del servidor:", err);
-//           return res
-//             .status(500)
-//             .json({ success: false, message: "Error interno del servidor" });
-//         }
-//         console.log("Inicio de sesión exitoso");
-//         return res.redirect("/login/inicio"); // Redirigir al usuario a la página de inicio
-//       });
-//     } catch (error) {
-//       console.log("Error interno del servidor:", error);
-//       return res
-//         .status(500)
-//         .json({ success: false, message: "Error interno del servidor" });
-//     }
-//   })(req, res, next);
-// }
 //funcion mostrar el render de la pagina de login (método GET)
 async function showLoginPage(req, res) {
   try {
-    res.redirect("/login");
+    res.render("login");
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");

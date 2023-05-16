@@ -4,46 +4,22 @@ const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
   {
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
+    email: { type: String, required: true, unique: true, trim: true },
+    password: { type: String, required: true },
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 
-userSchema.pre("save", async function (next) {
-  try {
-    // check method of registration
-    const user = this;
-    if (!user.isModified("password")) next(); // generate salt
-    const salt = await bcrypt.genSalt(10); // hash the password
-    const hashedPassword = await bcrypt.hash(this.password, salt); // replace plain text password with hashed password
-    this.password = hashedPassword;
-    next();
-  } catch (error) {
-    return next(error);
-  }
-});
-
-userSchema.method.encryptPassword = async (password) => {
+userSchema.methods.encryptPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
-  return await bcrypt.hash(password.salt);
+  return await bcrypt.hash(password, salt);
 };
 
 userSchema.methods.comparePassword = async function (password) {
-  try {
-    return await bcrypt.compare(password, this.password);
-  } catch (error) {
-    throw new Error(error);
-  }
+  return await bcrypt.compare(password, this.password);
 };
 
 const User = mongoose.model("User", userSchema);
