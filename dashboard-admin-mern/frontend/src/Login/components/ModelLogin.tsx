@@ -1,17 +1,17 @@
 import Login from "./Login";
 import imgSvg from "./../../assets/login.svg";
 
-interface User {
-  email: string;
-  password: string;
-  confirmPassword?: string;
-}
+// interface User {
+//   email: string;
+//   password: string;
+//   confirmPassword?: string;
+// }
 
-type modelProps = {
-  handleLogin: (user: User) => void;
-};
+// type modelProps = {
+//   handleLogin: (user: User) => void;
+// };
 
-const Model = ({ handleLogin }: modelProps) => {
+const Model = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -32,7 +32,7 @@ const Model = ({ handleLogin }: modelProps) => {
                   </div>
                 </div>
                 <div className="col-lg-6">
-                  <Login handleLogin={handleLogin} />
+                  <Login />
                 </div>
               </div>
             </div>

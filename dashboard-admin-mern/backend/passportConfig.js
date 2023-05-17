@@ -8,27 +8,23 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: "email",
-      passwordField: "password",
     },
     async (email, password, done) => {
-      try {
-        const user = await User.findOne({ email });
-        if (!user) {
-          return done(null, false, {
-            message: "Usuario o contraseña incorrectos",
-          });
-        } else {
-          const passwordMatch = await user.comparePassword(password);
-          if (passwordMatch) {
-            return done(null, user);
-          } else {
-            return done(null, false, {
-              message: "Contraseña incorrecta",
-            });
-          }
-        }
-      } catch (error) {
-        return done(error);
+      const user = await User.findOne({ email: email });
+      console.log("hola soy el " + user);
+      if (!user) {
+        return done(null, false, {
+          message: "Usuario no encontrado en la base de datos.",
+        });
+      }
+
+      const passwordMatch = await user.comparePassword(password);
+      if (passwordMatch) {
+        return done(null, user);
+      } else {
+        return done(null, false, {
+          message: "Contraseña incorrecta",
+        });
       }
     }
   )

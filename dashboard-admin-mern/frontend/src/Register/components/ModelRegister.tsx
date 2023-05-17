@@ -1,15 +1,15 @@
 import RegistroForm from "./Register";
 import imgSvg from "./../../assets/register.svg";
 
-interface User {
-  email: string;
-  password: string;
-  confirmPassword?: string;
-}
+// interface User {
+//   email: string;
+//   password: string;
+//   confirmPassword?: string;
+// }
 
-type modelProps = {
-  handleRegister: (user: User) => void;
-};
+// type modelProps = {
+//   handleRegister: (user: User) => void;
+// };
 
 const ModelRegister = () => {
   return (

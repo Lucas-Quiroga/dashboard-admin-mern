@@ -1,5 +1,5 @@
 const express = require("express");
-// const passport = require("passport");
+const passport = require("passport");
 const bcrypt = require("bcrypt");
 const User = require("./../models/User");
 const router = express.Router();
@@ -36,7 +36,7 @@ async function registerUser(req, res) {
 }
 
 //funcion mostrar el render de la pagina de registro (método GET)
-async function showRegistrationPage(req, res) {
+function showRegistrationPage(req, res) {
   try {
     res.render("register");
   } catch (error) {
@@ -55,6 +55,12 @@ async function showLoginPage(req, res) {
   }
 }
 
+const loginUser = passport.authenticate("login", {
+  successRedirect: "/login/inicio",
+  failureRedirect: "/login",
+  failureFlash: true,
+});
+
 //funcion para deslogear al Usuario (método GET)
 async function logout(req, res) {
   try {
@@ -69,6 +75,7 @@ async function logout(req, res) {
 module.exports = {
   registerUser,
   showRegistrationPage,
+  loginUser,
   showLoginPage,
   logout,
 };

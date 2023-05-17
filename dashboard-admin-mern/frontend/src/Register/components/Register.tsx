@@ -8,9 +8,9 @@ interface User {
   confirmPassword?: string;
 }
 
-type RegistroFormProps = {
-  handleRegister: (user: User) => void;
-};
+// type RegistroFormProps = {
+//   handleRegister: (user: User) => void;
+// };
 
 const RegistroForm = () => {
   const [user, setUser] = useState<User>({

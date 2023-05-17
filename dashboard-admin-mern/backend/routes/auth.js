@@ -5,40 +5,19 @@ const api = express.Router();
 const {
   registerUser,
   logout,
+  loginUser,
   showRegistrationPage,
   showLoginPage,
 } = require("./../controllers/usersController");
 
-api.get("/register", (req, res) => {
-  try {
-    res.render("register");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal server error");
-  }
-});
+//routes
+api.get("/register", showRegistrationPage);
 
 api.post("/register", registerUser);
 
 api.get("/login", showLoginPage);
 
-api.post("/login", (req, res, next) => {
-  passport.authenticate("login", (err, user, info) => {
-    console.log("usuario recibido:", user);
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      return res.redirect("/login");
-    }
-    req.login(user, (err) => {
-      if (err) {
-        return next(err);
-      }
-      return res.redirect("/login/inicio");
-    });
-  })(req, res, next);
-});
+api.post("/login", loginUser);
 
 api.get("/logout", logout);
 

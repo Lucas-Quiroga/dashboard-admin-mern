@@ -9,9 +9,9 @@ interface User {
   confirmPassword?: string;
 }
 
-interface LoginProps {
-  handleLogin: (user: User) => void;
-}
+// interface LoginProps {
+//   handleLogin: (user: User) => void;
+// }
 
 function Login() {
   const [user, setUser] = useState<User>({ email: "", password: "" });
