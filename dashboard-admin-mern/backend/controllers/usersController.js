@@ -55,11 +55,35 @@ async function showLoginPage(req, res) {
   }
 }
 
-const loginUser = passport.authenticate("login", {
-  successRedirect: "/login/inicio",
-  failureRedirect: "/login",
-  failureFlash: true,
-});
+const loginUser = (req, res, next) => {
+  passport.authenticate("login", (err, user, info) => {
+    console.log(user);
+    if (err) {
+      return res
+        .status(500)
+        .json({ success: false, message: "Error en el servidor" });
+    }
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "Usuario no encontrado en la base de datos",
+      });
+    }
+
+    req.login(user, (err) => {
+      if (err) {
+        return res
+          .status(500)
+          .json({ success: false, message: "Error en el servidor" });
+      }
+
+      return res
+        .status(200)
+        .json({ success: true, message: "Inicio de sesión exitoso" });
+    });
+  })(req, res, next);
+};
 
 //funcion para deslogear al Usuario (método GET)
 async function logout(req, res) {
