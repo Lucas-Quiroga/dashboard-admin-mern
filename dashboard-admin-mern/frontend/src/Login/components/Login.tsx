@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import HomeLogin from "../../Home/components/HomeLogin";
 
 interface User {
   email: string;
@@ -32,20 +33,20 @@ function Login() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     handleLogin(user);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [event.target.name]: event.target.value });
-    console.log(user);
+    // console.log(user);
   };
   <h4 className="text-dark mt-2 mb-2">Welcome back</h4>;
   return (
     <div className="container">
       {autenticado ? (
-        "hola usuario"
+        <HomeLogin />
       ) : (
         <div>
           <Form onSubmit={handleSubmit}>
