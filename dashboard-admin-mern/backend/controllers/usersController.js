@@ -80,7 +80,11 @@ const loginUser = (req, res, next) => {
 
       return res
         .status(200)
-        .json({ success: true, message: "Inicio de sesión exitoso" });
+        .json({
+          success: true,
+          message: "Inicio de sesión exitoso",
+          email: user.email,
+        });
     });
   })(req, res, next);
 };

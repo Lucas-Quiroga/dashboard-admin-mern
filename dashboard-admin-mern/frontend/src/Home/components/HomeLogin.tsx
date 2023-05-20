@@ -1,25 +1,31 @@
-// import { useState, useEffect } from "react";
-// import axios from "axios";
+import Toast from "react-bootstrap/Toast";
 
-function HomeLogin() {
-  // const [data, setData] = useState([]);
+type HomeLoginProps = {
+  email: string;
+};
 
-  // useEffect(() => {
-  //   const axiosData = async () => {
-  //     try {
-  //       const response = await axios.get("/login/inicio"); // Ruta de la API en tu backend
-  //       setData(response.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   axiosData();
-  // }, []);
-
+function HomeLogin({ email }: HomeLoginProps) {
   return (
-    <div>
-      <h1>HOLA USUARIO</h1>
+    <div className="d-flex align-items-center justify-content-center flex-column vh-100">
+      <Toast
+        className="middle-center mx-auto"
+        style={{ width: 400, fontSize: 15 }}
+      >
+        <Toast.Header closeButton={false}>
+          <img
+            src="holder.js/20x20?text=%20"
+            className="rounded me-2 "
+            alt=""
+          />
+          <strong className="me-auto">Welcome - {email}</strong>
+          <small>11 mins ago</small>
+        </Toast.Header>
+        <Toast.Body>
+          Hello, thank you for testing my application, it is very important to
+          me.
+        </Toast.Body>
+      </Toast>
+      <button className="btn btn-secondary mt-2">Logout</button>
     </div>
   );
 }
