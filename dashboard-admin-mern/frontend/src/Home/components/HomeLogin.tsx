@@ -1,10 +1,21 @@
 import Toast from "react-bootstrap/Toast";
+import axios from "axios";
 
 type HomeLoginProps = {
   email: string;
 };
 
 function HomeLogin({ email }: HomeLoginProps) {
+  const handleButton = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get("http://localhost:8080/logout");
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="d-flex align-items-center justify-content-center flex-column vh-100">
       <Toast
@@ -25,7 +36,10 @@ function HomeLogin({ email }: HomeLoginProps) {
           me.
         </Toast.Body>
       </Toast>
-      <button className="btn btn-secondary mt-2">Logout</button>
+
+      <button className="btn btn-secondary mt-2" onClick={handleButton}>
+        Logout
+      </button>
     </div>
   );
 }

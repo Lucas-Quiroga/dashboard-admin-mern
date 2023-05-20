@@ -3,6 +3,7 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 const User = require("./../models/User");
 const router = express.Router();
+require("../passportConfig");
 
 //funcion para registrar al Usuario (método POST)
 async function registerUser(req, res) {
@@ -78,13 +79,11 @@ const loginUser = (req, res, next) => {
           .json({ success: false, message: "Error en el servidor" });
       }
 
-      return res
-        .status(200)
-        .json({
-          success: true,
-          message: "Inicio de sesión exitoso",
-          email: user.email,
-        });
+      return res.status(200).json({
+        success: true,
+        message: "Inicio de sesión exitoso",
+        email: user.email,
+      });
     });
   })(req, res, next);
 };
@@ -92,8 +91,13 @@ const loginUser = (req, res, next) => {
 //funcion para deslogear al Usuario (método GET)
 async function logout(req, res) {
   try {
-    req.logout();
-    res.redirect("/login");
+    req.logout(function (err) {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Error al cerrar sesión" });
+      }
+      res.redirect("/login");
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al cerrar sesión" });

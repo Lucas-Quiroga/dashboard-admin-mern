@@ -13,7 +13,7 @@ type modelProps = {
 
 const Model = ({ handleLogin }: modelProps) => {
   return (
-    <div className="container">
+    <div className="container d-flex align-items-center justify-content-center flex-column vh-100">
       <div className="row justify-content-center">
         <div className="col-md-9 col-lg-12 col-xl-10">
           <div className="card shadow-lg o-hidden border-0 my-5">
