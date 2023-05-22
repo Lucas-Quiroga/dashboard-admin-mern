@@ -90,13 +90,14 @@ const loginUser = (req, res, next) => {
 
 //funcion para deslogear al Usuario (método GET)
 async function logout(req, res) {
+  console.log(req.body);
   try {
     req.logout(function (err) {
       if (err) {
         console.error(err);
         return res.status(500).json({ error: "Error al cerrar sesión" });
       }
-      res.redirect("/login");
+      return res.status(200).json({ success: true, redirectTo: "/login" });
     });
   } catch (error) {
     console.error(error);

@@ -39,6 +39,20 @@ function App() {
     }
   };
 
+  const handleLogout = async () => {
+    // e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8080/logout");
+      if (response.status === 200) {
+        setAuthenticated(false);
+      } else {
+        setAuthenticated(true);
+      }
+    } catch (error) {
+      console.log("el error es" + error);
+    }
+  };
+
   return (
     <div className="container mt-5">
       <BrowserRouter>
@@ -46,7 +60,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<ModelRegister />} />
           {authenticated ? (
-            <Route path="/login" element={<HomeLogin email={userEmail} />} />
+            <Route
+              path="/login"
+              element={
+                <HomeLogin email={userEmail} handleLogout={handleLogout} />
+              }
+            />
           ) : (
             <Route
               path="/login"

@@ -15,6 +15,6 @@ api.post("/register", registerUser);
 
 api.post("/login", loginUser);
 
-api.get("/logout", logout);
+api.post("/logout", logout);
 
 module.exports = api;
