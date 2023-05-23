@@ -6,6 +6,7 @@ import Home from "./Home/components/Home";
 import ModelRegister from "./Register/components/ModelRegister";
 import ModelLogin from "./Login/components/ModelLogin";
 import HomeLogin from "./Home/components/HomeLogin";
+import ToastTool from "./tools/ToastsTool";
 
 interface User {
   email: string;
@@ -20,6 +21,9 @@ interface User {
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
+  const [userError, setUserError] = useState(false);
+
+  const [showLogoutToast, setShowLogoutToast] = useState(false);
   const [userEmail, setUserEmail] = useState("");
 
   const handleLogin = async (user: User) => {
@@ -33,6 +37,7 @@ function App() {
         setUserEmail(useremail);
       } else {
         setAuthenticated(false);
+        setUserError(true);
       }
     } catch (error) {
       console.log(error);
@@ -45,6 +50,7 @@ function App() {
       const response = await axios.post("http://localhost:8080/logout");
       if (response.status === 200) {
         setAuthenticated(false);
+        setShowLogoutToast(true);
       } else {
         setAuthenticated(true);
       }
@@ -69,7 +75,12 @@ function App() {
           ) : (
             <Route
               path="/login"
-              element={<ModelLogin handleLogin={handleLogin} />}
+              element={
+                <ModelLogin
+                  handleLogin={handleLogin}
+                  showLogoutToast={showLogoutToast}
+                />
+              }
             />
           )}
         </Routes>

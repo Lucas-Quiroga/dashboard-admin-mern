@@ -1,4 +1,5 @@
 import Toast from "react-bootstrap/Toast";
+import ToastTool from "../../tools/ToastsTool";
 
 type HomeLoginProps = {
   email: string;
@@ -8,6 +9,11 @@ type HomeLoginProps = {
 function HomeLogin({ email, handleLogout }: HomeLoginProps) {
   return (
     <div className="d-flex align-items-center justify-content-center flex-column vh-100">
+      <ToastTool
+        ToastBody="Successful login."
+        ToastTittle="Hello"
+        ToastColor="success"
+      />
       <Toast
         className="middle-center mx-auto"
         style={{ width: 400, fontSize: 15 }}
@@ -22,8 +28,7 @@ function HomeLogin({ email, handleLogout }: HomeLoginProps) {
           <small>11 mins ago</small>
         </Toast.Header>
         <Toast.Body>
-          Hello, thank you for testing my application, it is very important to
-          me.
+          Thank you for testing my application, it is very important to me.
         </Toast.Body>
       </Toast>
 
