@@ -9,22 +9,25 @@ interface User {
 }
 
 type modelProps = {
-  handleLogin: (user: User) => void;
+  handleLogin: (user: User, childUser?: User) => void;
   showLogoutToast: boolean;
+  errorUserOffice: boolean;
 };
 
-const Model = ({ handleLogin, showLogoutToast }: modelProps) => {
+const Model = ({
+  handleLogin,
+  showLogoutToast,
+  errorUserOffice,
+}: modelProps) => {
   return (
     <>
-      {/* {statusUser === 404 ? (
+      {errorUserOffice && (
         <ToastTool
           ToastColor="danger"
-          ToastTittle="Sesión cerrada"
-          ToastBody="Sesión cerrada con éxito"
+          ToastTittle="Usuario no encontrado"
+          ToastBody="El email o la contraseña no coinciden o no estan en la base de datos"
         />
-      ) : (
-        "hola"
-      )} */}
+      )}
       {showLogoutToast && (
         <ToastTool
           ToastColor="primary"

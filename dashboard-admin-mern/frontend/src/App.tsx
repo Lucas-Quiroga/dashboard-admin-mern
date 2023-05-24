@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -6,7 +6,6 @@ import Home from "./Home/components/Home";
 import ModelRegister from "./Register/components/ModelRegister";
 import ModelLogin from "./Login/components/ModelLogin";
 import HomeLogin from "./Home/components/HomeLogin";
-import ToastTool from "./tools/ToastsTool";
 
 interface User {
   email: string;
@@ -14,17 +13,13 @@ interface User {
   confirmPassword?: string;
 }
 
-// interface AppProps {
-//   onLogin: (user: User) => void;
-//   handleLogin: (user: User) => void;
-// }
-
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [userError, setUserError] = useState(false);
-
-  const [showLogoutToast, setShowLogoutToast] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [userError, setUserError] = useState(false);
+  const [userErrorCount, setUserErrorCount] = useState(0);
+  const [errorUserOffice, setErrorUserOffice] = useState(false);
+  const [showLogoutToast, setShowLogoutToast] = useState(false);
 
   const handleLogin = async (user: User) => {
     try {
@@ -38,14 +33,18 @@ function App() {
       } else {
         setAuthenticated(false);
         setUserError(true);
+        setUserErrorCount(userErrorCount + 1);
+        setErrorUserOffice(true);
       }
     } catch (error) {
       console.log(error);
+      setUserError(true);
+      setUserErrorCount(userErrorCount + 1);
+      setErrorUserOffice(true);
     }
   };
 
   const handleLogout = async () => {
-    // e.preventDefault();
     try {
       const response = await axios.post("http://localhost:8080/logout");
       if (response.status === 200) {
@@ -58,6 +57,15 @@ function App() {
       console.log("el error es" + error);
     }
   };
+
+  useEffect(() => {
+    if (userError && userErrorCount > 0) {
+      setErrorUserOffice(true);
+      setTimeout(() => {
+        setErrorUserOffice(false);
+      }, 2000);
+    }
+  }, [userError, userErrorCount]);
 
   return (
     <div className="container mt-5">
@@ -79,6 +87,7 @@ function App() {
                 <ModelLogin
                   handleLogin={handleLogin}
                   showLogoutToast={showLogoutToast}
+                  errorUserOffice={errorUserOffice}
                 />
               }
             />
