@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import axios from "axios";
 
 interface User {
   email: string;
@@ -8,29 +7,27 @@ interface User {
   confirmPassword?: string;
 }
 
-// type RegistroFormProps = {
-//   handleRegister: (user: User) => void;
-// };
+type RegistroFormProps = {
+  handleRegister: (user: User) => void;
+  handleChangeState: React.MouseEventHandler<HTMLButtonElement> | undefined;
+};
 
-const RegistroForm = () => {
-  const [user, setUser] = useState<User>({
+const RegistroForm = ({
+  handleRegister,
+  handleChangeState,
+}: RegistroFormProps) => {
+  const initialUserState: User = {
     email: "",
     password: "",
     confirmPassword: "",
-  });
-
-  const handleRegister = async (user: User) => {
-    try {
-      const response = await axios.post("http://localhost:8080/register", user);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
   };
+
+  const [user, setUser] = useState<User>(initialUserState);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleRegister(user);
+    setUser(initialUserState);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +48,7 @@ const RegistroForm = () => {
           <Form.Control
             type="email"
             name="email"
+            value={user.email}
             placeholder="Enter email"
             onChange={handleChange}
             required
@@ -62,6 +60,7 @@ const RegistroForm = () => {
           <Form.Control
             type="password"
             name="password"
+            value={user.password}
             placeholder="Password"
             onChange={handleChange}
             required
@@ -74,6 +73,7 @@ const RegistroForm = () => {
             type="password"
             name="confirmPassword"
             placeholder="Confirm password"
+            value={user.confirmPassword}
             className="mb-3"
             onChange={handleChange}
             required
@@ -87,7 +87,7 @@ const RegistroForm = () => {
             variant="secondary"
             type="button"
             className="mx-2"
-            href="/login"
+            onClick={handleChangeState}
           >
             Login
           </Button>

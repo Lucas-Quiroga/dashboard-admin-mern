@@ -13,6 +13,11 @@ interface User {
   confirmPassword?: string;
 }
 
+enum AuthComponent {
+  REGISTER = "register",
+  LOGIN = "login",
+}
+
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [userEmail, setUserEmail] = useState("");
@@ -20,6 +25,9 @@ function App() {
   const [userErrorCount, setUserErrorCount] = useState(0);
   const [errorUserOffice, setErrorUserOffice] = useState(false);
   const [showLogoutToast, setShowLogoutToast] = useState(false);
+  const [showRegisterToast, setShowRegisterToast] = useState(false);
+  const [spinnerState, setSpinnerState] = useState(false);
+  const [authComponent, setAuthComponent] = useState(AuthComponent.REGISTER);
 
   const handleLogin = async (user: User) => {
     try {
@@ -44,6 +52,20 @@ function App() {
     }
   };
 
+  const handleRegister = async (user: User) => {
+    try {
+      const response = await axios.post("http://localhost:8080/register", user);
+      if (response.status === 200) {
+        setShowRegisterToast(true);
+      } else {
+        setShowRegisterToast(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setShowRegisterToast(false);
+    }
+  };
+
   const handleLogout = async () => {
     try {
       const response = await axios.post("http://localhost:8080/logout");
@@ -56,6 +78,15 @@ function App() {
     } catch (error) {
       console.log("el error es" + error);
     }
+  };
+
+  const handleChangeState = () => {
+    setSpinnerState(!spinnerState);
+    setAuthComponent(
+      authComponent === AuthComponent.REGISTER
+        ? AuthComponent.REGISTER
+        : AuthComponent.LOGIN
+    );
   };
 
   useEffect(() => {
@@ -72,7 +103,18 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/register" element={<ModelRegister />} />
+
+          <Route
+            path="/register"
+            element={
+              <ModelRegister
+                handleRegister={handleRegister}
+                showRegisterToast={showRegisterToast}
+                handleChangeState={handleChangeState}
+              />
+            }
+          />
+
           {authenticated ? (
             <Route
               path="/login"
@@ -88,6 +130,7 @@ function App() {
                   handleLogin={handleLogin}
                   showLogoutToast={showLogoutToast}
                   errorUserOffice={errorUserOffice}
+                  handleChangeState={handleChangeState}
                 />
               }
             />
