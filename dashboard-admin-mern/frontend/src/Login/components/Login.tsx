@@ -25,10 +25,15 @@ function Login({ handleLogin }: loginProps) {
   };
 
   return (
-    <div className="container">
-      <h4 className="text-dark mt-2 mb-2">Welcome back</h4>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+    <div className="container d-flex flex-column justify-content-center align-items-center">
+      <h4
+        className="text-dark mt-2 mb-4"
+        style={{ fontFamily: "-moz-initial", fontSize: "2rem" }}
+      >
+        WELCOME BACK
+      </h4>
+      <Form onSubmit={handleSubmit} className="w-100">
+        <Form.Group className="mb-2" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -48,23 +53,25 @@ function Login({ handleLogin }: loginProps) {
             type="password"
             name="password"
             placeholder="Password"
+            className="mb-3"
             onChange={handleChange}
             required
             autoComplete="current-password"
           />
         </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Logear
-        </Button>
-        <Button
-          variant="secondary"
-          type="button"
-          className="mx-2"
-          href="/register"
-        >
-          Register
-        </Button>
+        <div className="d-flex justify-content-center mb-3">
+          <Button variant="primary" type="submit" className="mx-2">
+            Logear
+          </Button>
+          <Button
+            variant="secondary"
+            type="button"
+            className="mx-2"
+            href="/register"
+          >
+            Register
+          </Button>
+        </div>
       </Form>
     </div>
   );

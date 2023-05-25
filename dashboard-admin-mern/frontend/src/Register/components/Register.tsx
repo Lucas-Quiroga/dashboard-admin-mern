@@ -38,9 +38,14 @@ const RegistroForm = () => {
     // console.log(user);
   };
   return (
-    <div className="container">
-      <h4 className="text-dark mt-2 mb-2">Create acount</h4>
-      <Form onSubmit={handleSubmit}>
+    <div className="container d-flex flex-column justify-content-center align-items-center">
+      <h4
+        className="text-dark mt-2 mb-2"
+        style={{ fontFamily: "-moz-initial", fontSize: "2rem" }}
+      >
+        CREATE ACOUNT
+      </h4>
+      <Form onSubmit={handleSubmit} className="w-100">
         <Form.Group controlId="email" className="mb-2">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -74,18 +79,19 @@ const RegistroForm = () => {
             required
           />
         </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Registrarse
-        </Button>
-        <Button
-          variant="secondary"
-          type="button"
-          className="mx-2"
-          href="/login"
-        >
-          Logear
-        </Button>
+        <div className="d-flex justify-content-center mb-3">
+          <Button variant="primary" type="submit" className="mx-2">
+            Register
+          </Button>
+          <Button
+            variant="secondary"
+            type="button"
+            className="mx-2"
+            href="/login"
+          >
+            Login
+          </Button>
+        </div>
       </Form>
     </div>
   );
