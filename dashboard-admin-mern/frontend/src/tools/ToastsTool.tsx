@@ -26,7 +26,7 @@ function ToastTool({ ToastTittle, ToastBody, ToastColor }: ToastToolProps) {
     <ToastContainer
       position={"middle-center"}
       className="p-6"
-      style={{ position: "absolute", bottom: "5rem" }}
+      style={{ position: "absolute", bottom: "-5rem" }}
     >
       <Toast show={show} autohide bg={ToastColor} onClose={handleClose}>
         <Toast.Header>

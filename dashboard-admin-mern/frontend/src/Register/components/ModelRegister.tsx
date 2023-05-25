@@ -11,14 +11,9 @@ interface User {
 type modelProps = {
   handleRegister: (user: User) => void;
   showRegisterToast: boolean;
-  handleChangeState: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const ModelRegister = ({
-  handleRegister,
-  showRegisterToast,
-  handleChangeState,
-}: modelProps) => {
+const ModelRegister = ({ handleRegister, showRegisterToast }: modelProps) => {
   return (
     <>
       {showRegisterToast && (
@@ -47,10 +42,7 @@ const ModelRegister = ({
                     </div>
                   </div>
                   <div className="col-lg-6">
-                    <RegistroForm
-                      handleRegister={handleRegister}
-                      handleChangeState={handleChangeState}
-                    />
+                    <RegistroForm handleRegister={handleRegister} />
                   </div>
                 </div>
               </div>

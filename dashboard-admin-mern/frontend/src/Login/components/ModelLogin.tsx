@@ -12,14 +12,12 @@ type modelProps = {
   handleLogin: (user: User, childUser?: User) => void;
   showLogoutToast: boolean;
   errorUserOffice: boolean;
-  handleChangeState: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
 const Model = ({
   handleLogin,
   showLogoutToast,
   errorUserOffice,
-  handleChangeState,
 }: modelProps) => {
   return (
     <>
@@ -56,10 +54,7 @@ const Model = ({
                     </div>
                   </div>
                   <div className="col-lg-6">
-                    <Login
-                      handleLogin={handleLogin}
-                      handleChangeState={handleChangeState}
-                    />
+                    <Login handleLogin={handleLogin} />
                   </div>
                 </div>
               </div>

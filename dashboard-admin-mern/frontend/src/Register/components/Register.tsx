@@ -9,13 +9,9 @@ interface User {
 
 type RegistroFormProps = {
   handleRegister: (user: User) => void;
-  handleChangeState: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const RegistroForm = ({
-  handleRegister,
-  handleChangeState,
-}: RegistroFormProps) => {
+const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
   const initialUserState: User = {
     email: "",
     password: "",
@@ -87,7 +83,7 @@ const RegistroForm = ({
             variant="secondary"
             type="button"
             className="mx-2"
-            onClick={handleChangeState}
+            href="/login"
           >
             Login
           </Button>

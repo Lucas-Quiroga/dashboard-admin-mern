@@ -10,10 +10,9 @@ interface User {
 
 type loginProps = {
   handleLogin: (user: User) => void;
-  handleChangeState: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-function Login({ handleLogin, handleChangeState }: loginProps) {
+function Login({ handleLogin }: loginProps) {
   const [user, setUser] = useState<User>({ email: "", password: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -68,8 +67,7 @@ function Login({ handleLogin, handleChangeState }: loginProps) {
             variant="secondary"
             type="button"
             className="mx-2"
-            // href="/register"
-            onClick={handleChangeState}
+            href="/register"
           >
             Register
           </Button>

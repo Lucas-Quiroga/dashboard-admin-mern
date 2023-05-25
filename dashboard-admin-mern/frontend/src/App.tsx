@@ -6,16 +6,12 @@ import Home from "./Home/components/Home";
 import ModelRegister from "./Register/components/ModelRegister";
 import ModelLogin from "./Login/components/ModelLogin";
 import HomeLogin from "./Home/components/HomeLogin";
+import { Spinner } from "react-bootstrap";
 
 interface User {
   email: string;
   password: string;
   confirmPassword?: string;
-}
-
-enum AuthComponent {
-  REGISTER = "register",
-  LOGIN = "login",
 }
 
 function App() {
@@ -27,7 +23,6 @@ function App() {
   const [showLogoutToast, setShowLogoutToast] = useState(false);
   const [showRegisterToast, setShowRegisterToast] = useState(false);
   const [spinnerState, setSpinnerState] = useState(false);
-  const [authComponent, setAuthComponent] = useState(AuthComponent.REGISTER);
 
   const handleLogin = async (user: User) => {
     try {
@@ -38,6 +33,10 @@ function App() {
         setAuthenticated(true);
         const useremail = response.data.email;
         setUserEmail(useremail);
+        setSpinnerState(true);
+        setTimeout(() => {
+          setSpinnerState(false);
+        }, 2000);
       } else {
         setAuthenticated(false);
         setUserError(true);
@@ -72,21 +71,16 @@ function App() {
       if (response.status === 200) {
         setAuthenticated(false);
         setShowLogoutToast(true);
+        setSpinnerState(true);
+        setTimeout(() => {
+          setSpinnerState(false);
+        }, 2000);
       } else {
         setAuthenticated(true);
       }
     } catch (error) {
       console.log("el error es" + error);
     }
-  };
-
-  const handleChangeState = () => {
-    setSpinnerState(!spinnerState);
-    setAuthComponent(
-      authComponent === AuthComponent.REGISTER
-        ? AuthComponent.REGISTER
-        : AuthComponent.LOGIN
-    );
   };
 
   useEffect(() => {
@@ -98,23 +92,32 @@ function App() {
     }
   }, [userError, userErrorCount]);
 
+  if (spinnerState) {
+    return (
+      <div className="container mt-5">
+        <div className="d-flex align-items-center justify-content-center flex-column vh-100">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mt-5">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-
           <Route
             path="/register"
             element={
               <ModelRegister
                 handleRegister={handleRegister}
                 showRegisterToast={showRegisterToast}
-                handleChangeState={handleChangeState}
               />
             }
           />
-
           {authenticated ? (
             <Route
               path="/login"
@@ -130,7 +133,6 @@ function App() {
                   handleLogin={handleLogin}
                   showLogoutToast={showLogoutToast}
                   errorUserOffice={errorUserOffice}
-                  handleChangeState={handleChangeState}
                 />
               }
             />
