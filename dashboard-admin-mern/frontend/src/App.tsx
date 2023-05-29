@@ -17,7 +17,11 @@ function App() {
     errorUserOffice,
     spinnerState,
     showRegisterToast,
+    showRegisterOtherToast,
+    registerError,
+    userErrorCountRegister,
     showLogoutToast,
+    setShowRegisterOtherToast,
     setErrorUserOffice,
     handleLogin,
     handleRegister,
@@ -32,6 +36,15 @@ function App() {
       }, 2000);
     }
   }, [userError, userErrorCount]);
+
+  useEffect(() => {
+    if (registerError && userErrorCountRegister > 0) {
+      setShowRegisterOtherToast(true);
+      setTimeout(() => {
+        setShowRegisterOtherToast(false);
+      }, 2000);
+    }
+  }, [registerError, userErrorCountRegister]);
 
   if (spinnerState) {
     return (
@@ -56,6 +69,7 @@ function App() {
               <ModelRegister
                 handleRegister={handleRegister}
                 showRegisterToast={showRegisterToast}
+                showRegisterOtherToast={showRegisterOtherToast}
               />
             }
           />

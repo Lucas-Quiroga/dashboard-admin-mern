@@ -40,6 +40,7 @@ function Login({ handleLogin }: loginProps) {
             name="email"
             placeholder="Enter email"
             onChange={handleChange}
+            autoFocus
             required
           />
           <Form.Text className="text-muted">
@@ -61,7 +62,7 @@ function Login({ handleLogin }: loginProps) {
         </Form.Group>
         <div className="d-flex justify-content-center mb-3">
           <Button variant="primary" type="submit" className="mx-2">
-            Logear
+            Log in
           </Button>
           <Button
             variant="secondary"

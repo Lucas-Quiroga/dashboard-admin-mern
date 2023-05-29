@@ -16,6 +16,9 @@ export const useServices = () => {
   const [spinnerState, setSpinnerState] = useState(false);
   const [showLogoutToast, setShowLogoutToast] = useState(false);
   const [showRegisterToast, setShowRegisterToast] = useState(false);
+  const [showRegisterOtherToast, setShowRegisterOtherToast] = useState(false);
+  const [userErrorCountRegister, setUserErrorCountRegister] = useState(0);
+  const [registerError, setRegisterError] = useState(false);
 
   const handleLogin = async (user: User) => {
     try {
@@ -51,10 +54,16 @@ export const useServices = () => {
         setShowRegisterToast(true);
       } else {
         setShowRegisterToast(false);
+        setRegisterError(true);
+        setUserErrorCountRegister(userErrorCountRegister + 1);
+        setShowRegisterOtherToast(true);
       }
     } catch (error) {
       console.log(error);
       setShowRegisterToast(false);
+      setRegisterError(true);
+      setUserErrorCountRegister(userErrorCountRegister + 1);
+      setShowRegisterOtherToast(true);
     }
   };
 
@@ -84,7 +93,11 @@ export const useServices = () => {
     errorUserOffice,
     spinnerState,
     showRegisterToast,
+    showRegisterOtherToast,
+    registerError,
+    userErrorCountRegister,
     showLogoutToast,
+    setShowRegisterOtherToast,
     setErrorUserOffice,
     handleLogin,
     handleRegister,

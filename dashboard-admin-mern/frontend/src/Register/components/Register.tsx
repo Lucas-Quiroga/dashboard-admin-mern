@@ -47,6 +47,7 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
             value={user.email}
             placeholder="Enter email"
             onChange={handleChange}
+            autoFocus
             required
           />
         </Form.Group>
@@ -85,7 +86,7 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
             className="mx-2"
             href="/login"
           >
-            Login
+            Log in
           </Button>
         </div>
       </Form>

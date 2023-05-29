@@ -11,16 +11,28 @@ interface User {
 type modelProps = {
   handleRegister: (user: User) => void;
   showRegisterToast: boolean;
+  showRegisterOtherToast: boolean;
 };
 
-const ModelRegister = ({ handleRegister, showRegisterToast }: modelProps) => {
+const ModelRegister = ({
+  handleRegister,
+  showRegisterToast,
+  showRegisterOtherToast,
+}: modelProps) => {
   return (
     <>
+      {showRegisterOtherToast && (
+        <ToastTool
+          ToastColor="danger"
+          ToastTittle="User could not be registered"
+          ToastBody="Passwords do not match."
+        />
+      )}
       {showRegisterToast && (
         <ToastTool
           ToastColor="success"
-          ToastTittle="Usuario registrado correctamente"
-          ToastBody="los datos fueron guardados en la base de datos"
+          ToastTittle="User successfully registered"
+          ToastBody="User successfully created."
         />
       )}
       <div className="container d-flex align-items-center justify-content-center flex-column vh-100">

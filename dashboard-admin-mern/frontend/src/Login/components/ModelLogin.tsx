@@ -24,15 +24,15 @@ const Model = ({
       {errorUserOffice && (
         <ToastTool
           ToastColor="danger"
-          ToastTittle="Usuario no encontrado"
-          ToastBody="El email o la contraseña no coinciden o no estan en la base de datos"
+          ToastTittle="User not found"
+          ToastBody="The email or password does not match or is not in the database."
         />
       )}
       {showLogoutToast && (
         <ToastTool
           ToastColor="primary"
-          ToastTittle="Sesión cerrada"
-          ToastBody="Sesión cerrada con éxito"
+          ToastTittle="Closed session"
+          ToastBody="Session successfully closed."
         />
       )}
       <div className="container d-flex align-items-center justify-content-center flex-column vh-100">
