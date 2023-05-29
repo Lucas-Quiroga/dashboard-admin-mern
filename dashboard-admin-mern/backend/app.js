@@ -1,13 +1,7 @@
 const express = require("express");
-// const path = require("path");
 const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const bcrypt = require("bcrypt");
-const User = require("./models/User");
-// const JwtStrategy = require("passport-jwt").Strategy;
-// const ExtractJwt = require("passport-jwt").ExtractJwt;
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const api = require("./routes/auth");
@@ -17,7 +11,6 @@ require("./passportConfig");
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, "frontend", "index.html")));
 
 // Configuración de la sesión
 app.use(

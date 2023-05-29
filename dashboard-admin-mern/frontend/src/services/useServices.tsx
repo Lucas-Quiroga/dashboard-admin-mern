@@ -23,7 +23,6 @@ export const useServices = () => {
   const handleLogin = async (user: User) => {
     try {
       const response = await axios.post("http://localhost:8080/login", user);
-      console.log(response.data);
 
       if (response.data.success) {
         setAuthenticated(true);

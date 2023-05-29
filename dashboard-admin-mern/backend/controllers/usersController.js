@@ -1,13 +1,10 @@
-const express = require("express");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const User = require("./../models/User");
-const router = express.Router();
 require("../passportConfig");
 
 //funcion para registrar al Usuario (método POST)
 async function registerUser(req, res) {
-  console.log(req.body);
   const { email, password, confirmPassword } = req.body;
   if (password !== confirmPassword) {
     return res.status(400).json({ message: "Las contraseñas no coinciden" });
@@ -36,29 +33,8 @@ async function registerUser(req, res) {
   }
 }
 
-//funcion mostrar el render de la pagina de registro (método GET)
-function showRegistrationPage(req, res) {
-  try {
-    res.render("register");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal server error");
-  }
-}
-
-//funcion mostrar el render de la pagina de login (método GET)
-async function showLoginPage(req, res) {
-  try {
-    res.render("login");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal server error");
-  }
-}
-
 const loginUser = (req, res, next) => {
   passport.authenticate("login", (err, user, info) => {
-    console.log(user);
     if (err) {
       return res
         .status(500)
@@ -90,7 +66,6 @@ const loginUser = (req, res, next) => {
 
 //funcion para deslogear al Usuario (método GET)
 async function logout(req, res) {
-  console.log(req.body);
   try {
     req.logout(function (err) {
       if (err) {
@@ -107,8 +82,6 @@ async function logout(req, res) {
 
 module.exports = {
   registerUser,
-  showRegistrationPage,
   loginUser,
-  showLoginPage,
   logout,
 };
