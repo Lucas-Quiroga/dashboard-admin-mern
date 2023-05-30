@@ -25,7 +25,7 @@ const Model = ({
         <ToastTool
           ToastColor="danger"
           ToastTittle="User not found"
-          ToastBody="The email or password does not match or is not in the database."
+          ToastBody="The e-mail address or password is not correct."
         />
       )}
       {showLogoutToast && (

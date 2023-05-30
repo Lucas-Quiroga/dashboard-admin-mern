@@ -25,7 +25,7 @@ const ModelRegister = ({
         <ToastTool
           ToastColor="danger"
           ToastTittle="User could not be registered"
-          ToastBody="Passwords do not match."
+          ToastBody="Passwords do not match or email already registered."
         />
       )}
       {showRegisterToast && (
