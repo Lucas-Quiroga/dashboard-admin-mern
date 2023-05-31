@@ -77,7 +77,16 @@ const RegistroForm = ({ handleRegister }: RegistroFormProps) => {
           />
         </Form.Group>
         <div className="d-flex justify-content-center mb-3">
-          <Button variant="primary" type="submit" className="mx-2">
+          <Button
+            variant={
+              user.password !== user.confirmPassword ? "danger" : "primary"
+            }
+            type="submit"
+            className="mx-2"
+            style={{
+              transition: "background-color 0.8s ease",
+            }}
+          >
             Register
           </Button>
           <Button
