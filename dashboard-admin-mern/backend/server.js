@@ -10,9 +10,8 @@ app.use(cors());
 async function initApp(appConfig, dataBaseMongoConfig) {
   try {
     await connectDb(dataBaseMongoConfig);
-    app.listen(appConfig.port, () =>
-      console.log(`listen on ${appConfig.port}`)
-    );
+    const port = process.env.PORT || appConfig.port;
+    app.listen(port, () => console.log(`Listen on port ${port}`));
   } catch (error) {
     console.log(error);
     process.exit(0);

@@ -20,9 +20,11 @@ export const useServices = () => {
   const [userErrorCountRegister, setUserErrorCountRegister] = useState(0);
   const [registerError, setRegisterError] = useState(false);
 
+  const apiURL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
   const handleLogin = async (user: User) => {
     try {
-      const response = await axios.post("http://localhost:8080/login", user);
+      const response = await axios.post(`${apiURL}/login`, user);
 
       if (response.data.success) {
         setAuthenticated(true);
@@ -48,7 +50,7 @@ export const useServices = () => {
 
   const handleRegister = async (user: User) => {
     try {
-      const response = await axios.post("http://localhost:8080/register", user);
+      const response = await axios.post(`${apiURL}/register`, user);
       if (response.status === 200) {
         setShowRegisterToast(true);
       } else {
@@ -68,7 +70,7 @@ export const useServices = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/logout");
+      const response = await axios.post(`${apiURL}/logout`);
       if (response.status === 200) {
         setAuthenticated(false);
         setShowLogoutToast(true);
