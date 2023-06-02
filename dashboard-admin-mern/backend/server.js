@@ -3,13 +3,13 @@ dotenv.config();
 const app = require("./app");
 const cors = require("cors");
 const connectDb = require("./db/mongodb");
-const { appConfig, dataBaseConfig } = require("./config");
+const { appConfig, dataBaseConfig, dataBaseMongoConfig } = require("./config");
 
 app.use(cors());
 
-async function initApp(appConfig, dataBaseConfig) {
+async function initApp(appConfig, dataBaseMongoConfig) {
   try {
-    await connectDb(dataBaseConfig);
+    await connectDb(dataBaseMongoConfig);
     app.listen(appConfig.port, () =>
       console.log(`listen on ${appConfig.port}`)
     );
@@ -19,4 +19,4 @@ async function initApp(appConfig, dataBaseConfig) {
   }
 }
 
-initApp(appConfig, dataBaseConfig);
+initApp(appConfig, dataBaseMongoConfig);
