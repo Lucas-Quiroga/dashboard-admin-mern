@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Home from "./Home/components/Home";
-import ModelRegister from "./Register/components/ModelRegister";
-import ModelLogin from "./Login/components/ModelLogin";
-import HomeLogin from "./Home/components/HomeLogin";
+import Home from "./components/Home/Home";
+import ModelRegister from "./components/Register/components/ModelRegister";
+import ModelLogin from "./components/Login/components/ModelLogin";
+import HomeLogin from "./components/HomeLogin/HomeLogin";
 import { Spinner } from "react-bootstrap";
 import { useServices } from "./services/useServices";
 

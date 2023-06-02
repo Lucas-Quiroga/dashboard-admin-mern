@@ -20,7 +20,8 @@ export const useServices = () => {
   const [userErrorCountRegister, setUserErrorCountRegister] = useState(0);
   const [registerError, setRegisterError] = useState(false);
 
-  const apiURL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+  // const apiURL = window.REACT_APP_API_URL || "http://localhost:8080";
+  const apiURL = "https://registration-and-login-form-user.onrender.com";
 
   const handleLogin = async (user: User) => {
     try {

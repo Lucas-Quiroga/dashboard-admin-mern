@@ -1,6 +1,6 @@
-import RegistroForm from "./Register";
-import imgSvg from "./../../assets/register.svg";
-import ToastTool from "../../tools/ToastsTool";
+import RegistroForm from "../Register";
+import imgSvg from "./../../../assets/register.svg";
+import ToastTool from "../../../tools/ToastsTool";
 
 interface User {
   email: string;

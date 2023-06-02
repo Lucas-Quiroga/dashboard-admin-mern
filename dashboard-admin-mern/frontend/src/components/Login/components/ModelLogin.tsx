@@ -1,6 +1,6 @@
-import Login from "./Login";
-import imgSvg from "./../../assets/login.svg";
-import ToastTool from "../../tools/ToastsTool";
+import Login from "../Login";
+import imgSvg from "../../../assets/login.svg";
+import ToastTool from "../../../tools/ToastsTool";
 
 interface User {
   email: string;
