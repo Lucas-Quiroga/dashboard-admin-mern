@@ -1,14 +1,14 @@
 # Login-Register App 🚪🔑
 
-This project is a login-register application with user authentication for both the backend and frontend.
+This project is a register and login application with user authentication for both the backend and frontend.
 
 ## Preview image 👁
 
-very soon
+![ScreenShot](/app-img.jpg)
 
 ## Deployment 📦
 
-very soon
+- [DEMO](https://login-register-user.netlify.app/) - Website
 
 ## Built With 🛠️
 
@@ -16,6 +16,7 @@ very soon
 - Frontend: React, Bootstrap, Typescript
 
 ## Backend tools 🔙
+
 - Nodemon: A tool that automatically restarts Node.js applications.
 - Standard: A JavaScript code style checker.
 - Bcrypt: A library for encrypting and hashing passwords.
@@ -31,6 +32,7 @@ very soon
 - Passport-local: A Passport strategy for authenticating with a username and password.
 
 ## Frontend tools 🔜
+
 - Axios: A promise-based HTTP client for the browser and Node.js.
 - Bootstrap: A popular CSS framework for building responsive web pages.
 - React: A JavaScript library for building user interfaces.
